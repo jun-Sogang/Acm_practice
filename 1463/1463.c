@@ -20,7 +20,8 @@ int count(int input)
     if(memo[input]>0)
         return memo[input];
     memo[input] = count(input-1)+1;
-    
+   
+
     if(input%2 == 0 && memo[input] > count(input/2)+1)
         memo[input] = count(input/2)+1;
     if(input%3 == 0 && memo[input] > count(input/3)+1)
