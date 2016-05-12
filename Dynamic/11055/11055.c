@@ -25,6 +25,7 @@ int main()
             }
         }
     }
+
     for(i=0; i<n; i++)
     {
         if(ans<d[i])
