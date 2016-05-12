@@ -16,7 +16,7 @@ int main()
     for(i=0; i<input; i++)
     {
         d[i]=1;
-        for(j=i-1; j>0; j--)
+        for(j=i-1; j>=0; j--)
         {
             if(a[i]<a[j] && d[i]<=d[j])
             {
