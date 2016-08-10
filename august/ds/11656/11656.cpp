@@ -1,17 +1,17 @@
 #include <cstdio>
-#include <algorithm>
-#include <queue>
 #include <string>
-#include <cstring>
-char a[1001];
+#include <algorithm>
+#include <vector>
+#include <iostream>
 using namespace std;
-
-int main()
-{
-    scanf("%s",a);
-    int len=a.lenth();
-    for(int i=0; i<len; i++)
-    {
-        q.push(a[i]);
-    }
+vector < string > v;
+int main(){
+    string a;
+    cin >> a ;
+    int size=a.size();
+    for(int i=0; i<size; i++)
+        v.push_back(a.substr(i,size));
+    sort(v.begin(),v.end());
+    for(int i=0; i<size; i++)
+        cout << v[i] << endl;
 }
