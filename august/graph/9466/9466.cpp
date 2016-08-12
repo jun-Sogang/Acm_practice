@@ -11,7 +11,7 @@ void dfs(int V)
 	visited[V] = cn++;
 	for (int i = 0; i < (int)v[V].size(); i++) {
 		if (visited[v[V][i]] == -1) {
-			visited[first] - 1;
+			visited[first] = -1;
 			cycle_vertex++;
 			break;
 		}
@@ -22,6 +22,7 @@ void dfs(int V)
 			cycle_vertex++;
 			break;
 		}
+        visited[V]=0;
 
 		
 	}
@@ -43,7 +44,7 @@ int main()
 		}
 		printf("%d\n", cycle_vertex);
 		cycle_vertex = 0;
-		for (int i = 0; i <= n; i++)
+		for (int i = 1; i <= n; i++)
 			v[i].clear();
 	}
 }
