@@ -21,11 +21,9 @@ void dfs(int V)
 			visited[first] = -1;
 			cycle_vertex++;
 			break;
-		}
-        visited[V]=0;
-
-		
+		}	
 	}
+    visited[V]=0;
 }
 int main()
 {
