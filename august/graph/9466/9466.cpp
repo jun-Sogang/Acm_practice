@@ -1,48 +1,50 @@
 #include <cstdio>
+#include <cstring>
 #include <vector>
+#include <stack>
 using namespace std;
-vector < vector < int > > v;
-long long visited[1000001];
-long long cn = 1;
-int first;
-int cycle_vertex = 0;
+vector < int > v[100005];
+bool visited[100005];
+int d[100005];
+int s[100005];
+int ans = 0;
+int cnt = 1;
+int set=0;
 void dfs(int V)
 {
-	visited[V] = cn++;
-	for (int i = 0; i < (int)v[V].size(); i++) {
-		if (visited[v[V][i]] == -1) {
-			visited[first] = -1;
-			cycle_vertex++;
-			break;
-		}
-		if (visited[v[V][i] ] ==0 || visited[v[V][i]] <first)
-			dfs(v[V][i]);
-		else if(visited[v[V][i]]!=first){
-			visited[first] = -1;
-			cycle_vertex++;
-			break;
-		}	
+	d[V] = cnt++;
+	s[V] = set; // 한 dfs당 순회한 정점을 묶어놓기 위함. 한 dfs당 최초로 하나의 사이클을 찾으면 된다.
+	visited[V] = true;
+	if (visited[v[V][0]] == false)
+		dfs(v[V][0]);
+	else {
+		if(s[V]==s[v[V][0]])	
+			ans+=cnt - d[v[V][0]];
 	}
-    visited[V]=0;
+
 }
 int main()
 {
-	int t,n,input;
+	int t, n, input;
 	scanf("%d%*c", &t);
 	while (t--) {
 		scanf("%d", &n);
-		v.resize(n + 1);
 		for (int i = 1; i <= n; i++) {
 			scanf("%d", &input);
 			v[i].push_back(input);
 		}
 		for (int i = 1; i <= n; i++) {
-			first = cn;
-			dfs(i);
+			if (visited[i] == false) {
+				set++;
+				dfs(i);
+			}
 		}
-		printf("%d\n", cycle_vertex);
-		cycle_vertex = 0;
+		printf("%d\n", n - ans);
+
 		for (int i = 1; i <= n; i++)
 			v[i].clear();
+		memset(visited, false, sizeof(visited));
+		ans = 0;
+
 	}
 }
