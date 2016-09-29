@@ -1,62 +1,54 @@
 #include <cstdio>
-#include <algorithm>
+#include <vector>
 using namespace std;
-
-//int a[10001];
-pair < int, int > a[10001];
-bool b[10001];
-int n, m;
-long long go(int mid) {
-	int count = n-m;
-	long long num = 0;
-	for (int i = 0; i < m; i++) {
-		num += mid / a[i].first;
-	}
-	return num;
-
+vector < int > v;
+typedef long long ll;
+int m;
+ll n;
+bool go(ll mid){
+    ll index=mid;
+    ll count=m;
+    for(int i=0; i<m; i++){
+        count+=index/v[i];
+    }
+    if(count < n)
+        return true;
+    else
+        return false;
 }
-int main() {
-	int tmp;
-	scanf("%d %d", &n, &m);
-	for (int i = 0; i < m; i++) {
-		scanf("%d", &tmp);
-		a[i].first = tmp;
-		a[i].second = i + 1;
-	}
-	long long ans = 0;
-
-	if (n <= m) {
-		printf("%d\n", n);
-		return 0;
-	}
-	else {
-		int left = 0;
-		long long right = 2000000000LL * 1000000LL;
-		while (left <= right) {
-			long long mid = left + (right - left) / 2;
-			long long time = go(mid);
-			if (time<n-m) {
-				left = mid + 1;
-			}
-			else
-				right = mid - 1;
-			ans = mid;
-		}
-	}
-	
-	//printf("%lld\n", ans);
-	int temp = 0;
-	int count = n - m;
-	for (int i = 0; i < m; i++)
-		temp += (ans - 1) / a[i].first;
-	//printf("%d\n", temp);
-	for (int i = 0; i < m; i++) {
-		if (ans%a[i].first == 0)
-			temp++;
-		if (temp == count)
-		{
-			printf("%d\n", a[i].second);
-			return 0;
-		}
-	}
+int main(){
+    scanf("%lld %d",&n,&m);
+    for(int i=0; i<m ;i++){
+        int tmp;
+        scanf("%d",&tmp);
+        v.push_back(tmp);
+    }
+    if(n<=m){
+        printf("%lld\n",n);
+        return 0;
+    }
+    ll left=1, right=2000000000LL * 1000000LL;
+    while(left<=right){
+        ll mid = (left+right)/2;
+        if(go(mid)){
+            left = mid+1;
+        }
+        else{
+            right = mid-1;
+        }
+    }
+    ll ans=0;
+    for(int i=0; i<m; i++){
+        ans+=(left-1)/v[i];
+    }
+    ans+=m;
+    ll temp=0;
+    for(int i=0; i<m; i++){
+        if((left)%v[i]==0)
+            temp++;
+        if(ans+temp == n){
+            printf("%d\n",i+1);
+            break;
+        }
+    }
 }
