@@ -7,7 +7,7 @@ using namespace std;
 vector < pair < int , int > > v[801];
 int dist[801];
 int visited[801];
-int inf=1000000000;
+int inf=100000000;
 priority_queue < pair < int , int > > pq;
 void New();
 int dijkstra(int start,int end){
