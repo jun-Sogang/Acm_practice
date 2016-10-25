@@ -9,6 +9,7 @@ vector < pair < int , int > > from_to;
 int dist[40002];
 int depth[40002];
 int pre_node[40002];
+bool visit[40002];
 int find_dist(int from, int to){
     int a=from;
     int b=to;
@@ -48,7 +49,6 @@ int main(){
         from_to.push_back(make_pair(a,b));
     }
     //depth setting + pre_node setting
-    bool visit[n];
     memset(visit,false,sizeof(visit));
     pre_node[1]=-1;
     depth[1]=0;
