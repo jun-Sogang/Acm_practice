@@ -11,7 +11,6 @@ int main() {
 	memset(v,0,sizeof(v));
 	memset(remainder,0,sizeof(remainder));
 	memset(sum,0,sizeof(remainder));
-	int temp;
 	for (int i = 0; i < n; i++) {
 		scanf("%d",&v[i]);
 	}
@@ -22,7 +21,7 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		remainder[sum[i]%m]++;
 	}
-	remainder[0]++; // S[1,i]%m == 0 인 경우를 찾기위해
+	remainder[0]++; // S[0,i]%m == 0 인 경우를 찾기위해
 	long long ans=0;
 	for(int i=0; i<n; i++)
 		if (remainder[i]!=0) {
