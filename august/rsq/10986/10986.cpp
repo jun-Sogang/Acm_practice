@@ -1,26 +1,33 @@
 #include <cstdio>
-typedef long long ll;
-ll a[1000001];
-ll tree[3000003];
-int n,m;
-ll ans=0;
-ll init(int node, int start, int end){
-    if(start == end)
-        return eree[node] = a[start];
-    else{
-        return tree[node] = init(node*2,start,(start+end)/2) + init(node*2+1,(start+end)/2+1,end);
-    }
-}
-ll query(int node, int start, int end, int i, int j){
-    if(
-}
-int main(){
-    scanf("%d %d",&n,&m);
-    for(int i=0; i<n; i++)
-        scanf("%lld",&a[i]);
-    init(1,0,n-1);
-    for(int j=0; j<n; j++)
-        for(int i=0; i<j; i++)
-            query(1,0,n-1,i,j);
-    printf("%lld\n",ans);
+#include <iostream>
+#include <cstring>
+using namespace std;
+int v[1000001];
+int remainder[1000001];
+int sum[1000001];
+int main() {
+	int n,m;
+	cin >> n >> m;
+	memset(v,0,sizeof(v));
+	memset(remainder,0,sizeof(remainder));
+	memset(sum,0,sizeof(remainder));
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d",&v[i]);
+	}
+	sum[0]=v[0]%m;
+	for(int i=1; i<n; i++){
+		sum[i] = (sum[i-1]+v[i])%m;
+	}
+	for (int i = 0; i < n; i++) {
+		remainder[sum[i]%m]++;
+	}
+	remainder[0]++; // S[1,i]%m == 0 인 경우를 찾기위해
+	long long ans=0;
+	for(int i=0; i<n; i++)
+		if (remainder[i]!=0) {
+			ans+=((long long)remainder[i]*((long long)remainder[i]-1))/2;
+			}
+	cout << ans << "\n";
+	return 0;
 }

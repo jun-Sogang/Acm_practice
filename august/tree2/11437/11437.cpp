@@ -16,6 +16,7 @@ int lsa(int a, int b){
         else{
             b=ances[b];
         }
+        21
     }
     while(a!=b){
         a=ances[a];
@@ -33,7 +34,7 @@ int main(){
         v[b].push_back(a);
     }
     depth[1]=0;
-    visit[1]=true; 
+    visit[1]=true;
     ances[1]=-1;
     q.push(1);
     while(!q.empty()){
@@ -55,4 +56,4 @@ int main(){
         cin >> a >> b;
         cout <<lsa(a,b) << "\n";
     }
-};  
+};
