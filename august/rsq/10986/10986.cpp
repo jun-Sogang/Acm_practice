@@ -11,7 +11,7 @@ int main() {
 	memset(v,0,sizeof(v));
 	memset(remainder,0,sizeof(remainder));
 	memset(sum,0,sizeof(remainder));
-
+	int temp;
 	for (int i = 0; i < n; i++) {
 		scanf("%d",&v[i]);
 	}
