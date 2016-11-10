@@ -26,6 +26,5 @@ int main(){
 	string a;
 	cin >> l >> a;
 	auto matched = preprocessing(a,l);
-	cout << l-matched[l-1];
-	puts("");
+	cout << l-matched[l-1] << endl;
 }
