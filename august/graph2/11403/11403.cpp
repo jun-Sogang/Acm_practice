@@ -7,7 +7,8 @@ void floyd_warshall() {
 		for (int j = 1; j <= n; j++)
 			for (int k = 1; k <= n; k++)
 				if (a[j][i] == 1 && a[i][k] == 1)
-					a[j][k] = a[j][i]+
+					a[j][k] = a[j][i]+;
+					//고쳐야함
 }
 int main() {
 	scanf("%d", &n);
