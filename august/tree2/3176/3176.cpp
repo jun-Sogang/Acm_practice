@@ -43,10 +43,10 @@ void query(int d,int e){
     if(u != v){
         for(int j = 18-1; j>=0; --j){
             if(parent[u][j] != -1 && parent[u][j] != parent[v][j]){
-                u=parent[u][j];
-                v=parent[v][j];
                 ans_least = min(ans_least, min(least[u][j],least[v][j]));
                 ans_largest = max(ans_largest,max(largest[u][j],largest[v][j]));
+				u=parent[u][j];
+                v=parent[v][j];
             }
         }
         ans_least = min(ans_least,min(least[u][0],least[v][0]));
@@ -73,7 +73,7 @@ int main(){
     depth[1]=0;
     make_parent_by_DFS(1);
     for(int j=0; j<18-1; ++j){
-        for(int i=1; i<n; ++i){
+        for(int i=1; i<=n; ++i){
             if(parent[i][j] != -1){
                 parent[i][j+1] = parent[parent[i][j]][j];
                 least[i][j+1] = min(least[i][j],least[parent[i][j]][j]);
