@@ -1,7 +1,6 @@
 #include <cstdio>
 #include <stack>
 using namespace std;
-
 int main(){
 	int n;
 	stack < int > s;
