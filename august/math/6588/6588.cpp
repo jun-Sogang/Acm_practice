@@ -1,5 +1,4 @@
 #include <cstdio>
-
 bool prime[1000001]= {false, };
 void find_prime(){
 	prime[0]=true;
