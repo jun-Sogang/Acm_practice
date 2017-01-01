@@ -14,7 +14,6 @@ int main()
 	int age;
 	char temp[101];
 	string v;
-
 	scanf("%d", &n);
 	s.resize(n);
 	name.resize(n);
