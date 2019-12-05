@@ -1,61 +1,78 @@
 #include <cstdio>
+#include <iostream>
 #include <queue>
 #include <algorithm>
+
 using namespace std;
 
-int tomato[1001][1001];
-int cnt = 0;
-int dx[4] = { 0,0,-1,1 };
-int dy[4] = { 1,-1,0,0 };
-int ans[1001][1001];
-int m, n;
+int N, M;
+int tomato[1001][1001] = {0, };
+int visited[1001][1001];
+int dx[4] = {0, 0, 1, -1};
+int dy[4] = {1, -1, 0, 0};
+int ans = 0;
+queue <pair <int, int> > que;
 
-void bfs(int i, int j) {
-	queue < pair < int, int > > que;
-	que.push(make_pair(i, j));
-	ans[i][j] = 1;
+
+
+void bfs() {
 	while (!que.empty()) {
 		int x = que.front().first;
 		int y = que.front().second;
+		
 		que.pop();
-		for (int l = 0; l < 4; l++) {
-			int nx = x + dx[l];
-			int ny = y + dy[l];
-			if (nx>=0 && nx<n && ny>=0 && ny<m && tomato[nx][ny] == 0 && (ans[nx][ny] > ans[x][y]+1||ans[nx][ny]==0)) {
-				que.push(make_pair(nx, ny));
-				ans[nx][ny] = ans[x][y]+1;
+
+		for (int k = 0; k < 4; ++k) {
+			int next_x = x + dx[k];
+			int next_y = y + dy[k];
+
+			if (tomato[next_x][next_y] != -1 && visited[next_x][next_y] == -1 && next_x >= 0 && next_x < N && next_y >= 0 && next_y < M) {
+				que.push(make_pair(next_x, next_y));
+				visited[next_x][next_y] = visited[x][y] + 1;
+				if(ans < visited[next_x][next_y]) ans = visited[next_x][next_y]; 
+			}
+		} 
+	}
+
+}
+
+int main() {
+	cin >> M >> N;
+	int count = 0;
+
+
+	for(int i = 0; i < N; ++i) {
+		for(int j = 0; j < M; ++j) {
+			int input;
+
+			scanf("%d", &input);
+			tomato[i][j] = input;
+			visited[i][j] = -1;
+
+			if(input == 1) {
+				visited[i][j] = 0;
+				count += 1;
+				que.push(make_pair(i, j));
 			}
 		}
 	}
-}
-int main() {
-	int Max = 0;
-	int total = 0;
-	scanf("%d %d",&m, &n);
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++) {
-			scanf("%d", &tomato[i][j]);
-			total += tomato[i][j];
-			ans[i][j] = tomato[i][j];
-		}
-	if (total == m*n) {
-		return printf("%d\n", 0);
-	}
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++) {
-			if(tomato[i][j]==1)
-				bfs(i, j);
-		}
-			
-	for(int i=0; i<n; i++)
-		for (int j = 0; j < m; j++) {
-			if (ans[i][j] == 0 )
-				return printf("%d\n", -1);
-		}
-	for(int i=0; i<n; i++)
-		for (int j = 0; j < m; j++) {
-			Max = max(Max, ans[i][j]);
-		}
-	return printf("%d\n", Max-1);
 
+	if(count == N * M) {
+		printf("0\n");
+		return 0;
+	}
+
+	bfs();
+
+	for(int i = 0; i < N; ++i) {
+		for(int j = 0; j < M; ++j) {
+			if (visited[i][j] == -1 && tomato[i][j] != -1) {
+				printf("-1\n");
+				return 0;
+			}
+		}
+	}
+
+	printf("%d\n", ans);
+	return 0;
 }
