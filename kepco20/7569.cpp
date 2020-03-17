@@ -22,7 +22,6 @@ int bfs() {
         int now_m = flag.front().second.second;
         int now_n = flag.front().second.first;
         int now_h = flag.front().first;
-        bool isUpdate = false;
 
       //  cout << now_m << now_n << now_h << endl;
         flag.pop();
